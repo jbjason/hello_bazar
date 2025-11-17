@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/util/my_dimens.dart';
-import 'package:hello_bazar/feature/dashboard/presentation/page/test_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -21,10 +20,7 @@ class DashboardPage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => TestPage()),
-                    );
+                    
                   },
                   child: Text("Dashboard Page"),
                 ),
