@@ -148,26 +148,26 @@ abstract class AppTheme {
       fillColor: MyColor.surfaceContainerLowest,
       contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 18.w),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+        borderRadius: BorderRadius.all(Radius.circular(13.5.r)),
         borderSide: BorderSide(color: MyColor.primary, width: 1.5.w),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+        borderRadius: BorderRadius.all(Radius.circular(13.5.r)),
         borderSide: BorderSide(color: MyColor.outlineVariant, width: 1.0.w),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+        borderRadius: BorderRadius.all(Radius.circular(13.5.r)),
         borderSide: BorderSide(color: MyColor.error, width: 1.5.w),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+        borderRadius: BorderRadius.all(Radius.circular(13.5.r)),
         borderSide: BorderSide(color: MyColor.error, width: 1.5.w),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.r)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(13.5.r)),
         ),
         padding: WidgetStateProperty.all(
           EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
@@ -344,26 +344,26 @@ abstract class AppTheme {
       fillColor: MyColor.darkSurfaceContainer,
       contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 18.w),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+        borderRadius: BorderRadius.all(Radius.circular(13.5.r)),
         borderSide: BorderSide(color: MyColor.primary, width: 1.5.w),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+        borderRadius: BorderRadius.all(Radius.circular(13.5.r)),
         borderSide: BorderSide(color: MyColor.darkOutlineVariant, width: 1.0.w),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+        borderRadius: BorderRadius.all(Radius.circular(13.5.r)),
         borderSide: BorderSide(color: MyColor.darkError, width: 1.5.w),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+        borderRadius: BorderRadius.all(Radius.circular(13.5.r)),
         borderSide: BorderSide(color: MyColor.darkError, width: 1.5.w),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.r)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(13.5.r)),
         ),
         padding: WidgetStateProperty.all(
           EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),

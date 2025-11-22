@@ -24,7 +24,7 @@ class HomeNavbarCartButton extends StatelessWidget {
           child: DecoratedBox(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: MyColor.success,
+              color: MyColor.primary,
             ),
             child: Icon(Icons.shopping_cart, color: MyColor.white, size: 24.w),
           ),

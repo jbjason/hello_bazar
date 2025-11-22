@@ -7,9 +7,9 @@ class MyDimens {
 
   static List<BoxShadow> get getShadow => [
     BoxShadow(
-      offset: Offset(3.w, 3.h),
+      offset: Offset(5.w, 5.h),
       blurRadius: 5.r,
-      color: MyColor.gray200,
+      color: MyColor.gray300,
     ),
   ];
 

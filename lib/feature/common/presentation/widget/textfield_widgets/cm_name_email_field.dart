@@ -30,20 +30,22 @@ class CmNameEmailField extends StatelessWidget {
       ),
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       validator: (value) {
-        // validation if it's city
-        if (label.toLowerCase().contains('city')) {
-          final haveNumber = _containsNumber(value!.trim());
-          final haveSpecialChar = _containsSpecialChar(value.trim());
-          if (value.trim().isEmpty) {
-            return 'Please give your City.';
-          } else if (haveNumber || haveSpecialChar) {
-            return 'Cities can\'t have number or special character';
-          } else {
-            return null;
-          }
-        }
-        // validation for email address
-        else if (label.toLowerCase().contains('email')) {
+        // // validation if it's city
+        // if (label.toLowerCase().contains('city')) {
+        //   final haveNumber = _containsNumber(value!.trim());
+        //   final haveSpecialChar = _containsSpecialChar(value.trim());
+        //   if (value.trim().isEmpty) {
+        //     return 'Please give your City.';
+        //   } else if (haveNumber || haveSpecialChar) {
+        //     return 'Cities can\'t have number or special character';
+        //   } else {
+        //     return null;
+        //   }
+        // }
+        // // validation for email address
+        // else 
+        
+        if (label.toLowerCase().contains('email')) {
           final haveDotCom = value!.trim().contains(".com");
           final haveDotOrg = value.trim().contains(".org");
           final haveSpace = value.trim().contains("..");
@@ -70,13 +72,13 @@ class CmNameEmailField extends StatelessWidget {
     );
   }
 
-  bool _containsNumber(String str) {
-    RegExp numberRegex = RegExp(r'[0-9]');
-    return numberRegex.hasMatch(str);
-  }
+  // bool _containsNumber(String str) {
+  //   RegExp numberRegex = RegExp(r'[0-9]');
+  //   return numberRegex.hasMatch(str);
+  // }
 
-  bool _containsSpecialChar(String str) {
-    RegExp specialCharacterRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
-    return specialCharacterRegex.hasMatch(str);
-  }
+  // bool _containsSpecialChar(String str) {
+  //   RegExp specialCharacterRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+  //   return specialCharacterRegex.hasMatch(str);
+  // }
 }

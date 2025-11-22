@@ -1,11 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hello_bazar/core/constants/my_color.dart';
-import 'package:hello_bazar/core/constants/my_icon.dart';
-import 'package:hello_bazar/core/constants/my_image.dart';
-import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_name_email_field.dart';
+import 'package:hello_bazar/feature/dashboard/presentation/widget/dashboard_all_user_list.dart';
+import 'package:hello_bazar/feature/dashboard/presentation/widget/dashboard_appbar.dart';
+import 'package:hello_bazar/feature/dashboard/presentation/widget/dashboard_recent_list.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -15,84 +13,15 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            padding: EdgeInsets.fromLTRB(16.0, 20.h, 16.0, 16.0),
-            color: MyColor.primary,
-            child: SafeArea(
-              child: Form(
-                child: Column(
-                  spacing: 20.h,
-                  children: [
-                    Row(
-                      spacing: 10.w,
-                      crossAxisAlignment: .center,
-                      children: [
-                        CircleAvatar(
-                          radius: 28,
-                          backgroundImage: AssetImage(MyImage.profilePic),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: .start,
-                            children: [
-                              // top texts
-                              Text(
-                                "Hello Jb",
-                                style: GoogleFonts.lora(
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.bold,
-                                  color: MyColor.white,
-                                ),
-                              ),
-                              Text(
-                                "Mobile App Developer",
-                                style: GoogleFonts.oswald(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: MyColor.white,
-                                ),
-                              ),
-                              // spacer --> we r using spacer to but blue-box with the help of Stack()å
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      spacing: 10.w,
-                      crossAxisAlignment: .center,
-                      children: [
-                        Expanded(
-                          child: CmNameEmailField(
-                            controller: TextEditingController(),
-                            label: "Search ..",
-                            readOnly: false,
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(12.w),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
-                            color: MyColor.gray200,
-                          ),
-                          child: Image.asset(MyIcon.settings),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          const Expanded(
+          DashboardAppbar(),
+          Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
+              padding: EdgeInsets.all(12.h),
               child: Column(
                 children: [
-                  RecentSearchContacts(),
+                  DashboardRecentList(),
                   SizedBox(height: 16.0),
-                  // you can show suggested style for search result
-                  SuggestedContacts(),
+                  DashboardAllUserList(),
                 ],
               ),
             ),
@@ -102,130 +31,3 @@ class DashboardPage extends StatelessWidget {
     );
   }
 }
-
-class SuggestedContacts extends StatelessWidget {
-  const SuggestedContacts({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            "Suggested",
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: Theme.of(
-                context,
-              ).textTheme.titleSmall!.color!.withOpacity(0.32),
-            ),
-          ),
-        ),
-        const SizedBox(height: 16.0),
-        ...List.generate(
-          demoContactsImage.length,
-          (index) => ListTile(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 16.0 / 2,
-            ),
-            leading: CircleAvatar(
-              radius: 24,
-              backgroundImage: NetworkImage(demoContactsImage[index]),
-            ),
-            title: const Text("Jenny Wilson"),
-            onTap: () {},
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class RecentSearchContacts extends StatelessWidget {
-  const RecentSearchContacts({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Recent search",
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: Theme.of(
-                context,
-              ).textTheme.titleSmall!.color!.withOpacity(0.32),
-            ),
-          ),
-          const SizedBox(height: 16.0),
-          SizedBox(
-            width: double.infinity,
-            height: 56,
-            child: Stack(
-              children: [
-                ...List.generate(
-                  demoContactsImage.length + 1,
-                  (index) => Positioned(
-                    left: index * 48,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 4,
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                        ),
-                        shape: BoxShape.circle,
-                      ),
-                      child: index < demoContactsImage.length
-                          ? CircleAvatar(
-                              radius: 26,
-                              backgroundImage: NetworkImage(
-                                demoContactsImage[index],
-                              ),
-                            )
-                          : const RoundedCounter(total: 35),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class RoundedCounter extends StatelessWidget {
-  final int total;
-
-  const RoundedCounter({super.key, required this.total});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 52,
-      width: 52,
-      decoration: BoxDecoration(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? const Color(0xFF2E2F45)
-            : const Color(0xFFEBFAF3),
-        shape: BoxShape.circle,
-      ),
-      child: Center(
-        child: Text("$total+", style: Theme.of(context).textTheme.titleMedium),
-      ),
-    );
-  }
-}
-
-final List<String> demoContactsImage = [
-  'https://i.postimg.cc/g25VYN7X/user-1.png',
-  'https://i.postimg.cc/cCsYDjvj/user-2.png',
-  'https://i.postimg.cc/sXC5W1s3/user-3.png',
-  'https://i.postimg.cc/4dvVQZxV/user-4.png',
-  'https://i.postimg.cc/FzDSwZcK/user-5.png',
-];

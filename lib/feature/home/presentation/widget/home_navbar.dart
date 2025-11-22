@@ -50,6 +50,7 @@ class HomeNavbar extends StatelessWidget {
             currentPage == index
                 ? MyConstants.navItemSelectedImages[index]
                 : MyConstants.navItemImages[index],
+            color: currentPage == index ? MyColor.primary : null,
           ),
         ),
       );
