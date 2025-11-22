@@ -1,7 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
-import 'package:hello_bazar/core/util/my_dimens.dart';
+import 'package:hello_bazar/core/constants/my_icon.dart';
+import 'package:hello_bazar/core/constants/my_image.dart';
+import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_name_email_field.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -9,39 +13,73 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyDimens().getNormalAppBar("Dashboard", [], context),
       body: Column(
         children: [
-          // Appbar search
           Container(
-            padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
+            padding: EdgeInsets.fromLTRB(16.0, 20.h, 16.0, 16.0),
             color: MyColor.primary,
-            child: Form(
-              child: TextFormField(
-                autofocus: true,
-                textInputAction: TextInputAction.search,
-                onChanged: (value) {
-                  // search
-                },
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: const Color(0xFF1D1D35).withOpacity(0.64),
-                  ),
-                  hintText: "Search",
-                  hintStyle: TextStyle(
-                    color: const Color(0xFF1D1D35).withOpacity(0.64),
-                  ),
-                  filled: true,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16.0 * 1.5,
-                    vertical: 16.0,
-                  ),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),
+            child: SafeArea(
+              child: Form(
+                child: Column(
+                  spacing: 20.h,
+                  children: [
+                    Row(
+                      spacing: 10.w,
+                      crossAxisAlignment: .center,
+                      children: [
+                        CircleAvatar(
+                          radius: 28,
+                          backgroundImage: AssetImage(MyImage.profilePic),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              // top texts
+                              Text(
+                                "Hello Jb",
+                                style: GoogleFonts.lora(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold,
+                                  color: MyColor.white,
+                                ),
+                              ),
+                              Text(
+                                "Mobile App Developer",
+                                style: GoogleFonts.oswald(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: MyColor.white,
+                                ),
+                              ),
+                              // spacer --> we r using spacer to but blue-box with the help of Stack()å
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      spacing: 10.w,
+                      crossAxisAlignment: .center,
+                      children: [
+                        Expanded(
+                          child: CmNameEmailField(
+                            controller: TextEditingController(),
+                            label: "Search ..",
+                            readOnly: false,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(12.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            color: MyColor.gray200,
+                          ),
+                          child: Image.asset(MyIcon.settings),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
