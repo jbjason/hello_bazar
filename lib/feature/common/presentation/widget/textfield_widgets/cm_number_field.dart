@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CmNumberField extends StatelessWidget {
-  const CmNumberField(
-      {super.key,
-      required this.controller,
-      required this.label,
-      this.readOnly});
+  const CmNumberField({
+    super.key,
+    required this.controller,
+    required this.label,
+    this.readOnly,
+  });
   final TextEditingController controller;
   final String label;
   final bool? readOnly;
@@ -21,6 +22,7 @@ class CmNumberField extends StatelessWidget {
         style: const TextStyle(fontSize: 15),
         decoration: InputDecoration(labelText: label),
         readOnly: readOnly ?? false,
+        onTapOutside: (event) => FocusScope.of(context).unfocus(),
         validator: (val) {
           if (val!.isEmpty) {
             return 'This Field is required';

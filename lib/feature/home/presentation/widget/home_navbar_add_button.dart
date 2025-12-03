@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
+import 'package:hello_bazar/feature/product/presentation/screen/product_add_screen.dart';
 
 class HomeNavbarAddButton extends StatelessWidget {
   const HomeNavbarAddButton({
@@ -13,25 +14,33 @@ class HomeNavbarAddButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: itemWidth,
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            width: itemWidth * .8,
-            height: itemWidth * .8,
-            bottom: bottomHeight,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: MyColor.primary,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ProductAddScreen()),
+        );
+      },
+      child: SizedBox(
+        width: itemWidth,
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              width: itemWidth * .8,
+              height: itemWidth * .8,
+              bottom: bottomHeight,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: MyColor.primary,
+                ),
+                child: Icon(Icons.add, color: MyColor.white, size: 24.w),
               ),
-              child: Icon(Icons.add, color: MyColor.white, size: 24.w),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
