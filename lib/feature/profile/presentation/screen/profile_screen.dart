@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
 import 'package:hello_bazar/core/constants/my_icon.dart';
+import 'package:hello_bazar/core/constants/my_image.dart';
 import 'package:hello_bazar/core/util/my_dimens.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -19,12 +20,12 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 ProfileMenu(
                   text: "My Account",
-                  icon: MyIcon.message1,
+                  icon: MyIcon.file1,
                   press: () => {},
                 ),
                 ProfileMenu(
                   text: "Notifications",
-                  icon: MyIcon.message2,
+                  icon: MyIcon.home1,
                   press: () {},
                 ),
                 ProfileMenu(
@@ -34,14 +35,10 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 ProfileMenu(
                   text: "Help Center",
-                  icon: MyIcon.message2,
+                  icon: MyIcon.search1,
                   press: () {},
                 ),
-                ProfileMenu(
-                  text: "Log Out",
-                  icon: MyIcon.message1,
-                  press: () {},
-                ),
+                ProfileMenu(text: "Log Out", icon: MyIcon.notification, press: () {}),
               ],
             ),
           ),
@@ -63,11 +60,7 @@ class ProfilePic extends StatelessWidget {
         fit: StackFit.expand,
         clipBehavior: Clip.none,
         children: [
-          const CircleAvatar(
-            backgroundImage: NetworkImage(
-              "https://i.postimg.cc/0jqKB6mS/Profile-Image.png",
-            ),
-          ),
+          const CircleAvatar(backgroundImage: AssetImage(MyImage.profilePic)),
           Positioned(
             right: -16,
             bottom: 0,
