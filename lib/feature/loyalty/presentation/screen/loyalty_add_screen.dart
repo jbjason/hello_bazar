@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/util/my_dimens.dart';
-import 'package:hello_bazar/feature/product/presentation/widget/product_add_summary_details.dart';
-//import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_number_field.dart';
+import 'package:hello_bazar/feature/loyalty/presentation/widget/loyalty_add_widgets/loyalty_add_submit_button.dart';
+import 'package:hello_bazar/feature/loyalty/presentation/widget/loyalty_add_widgets/loyalty_add_summary_details.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
-class ProductAddScreen extends StatefulWidget {
-  const ProductAddScreen({super.key});
+class LoyaltyAddScreen extends StatefulWidget {
+  const LoyaltyAddScreen({super.key});
   @override
-  State<ProductAddScreen> createState() => _ProductAddScreenState();
+  State<LoyaltyAddScreen> createState() => _LoyaltyAddScreenState();
 }
 
-class _ProductAddScreenState extends State<ProductAddScreen> {
+class _LoyaltyAddScreenState extends State<LoyaltyAddScreen> {
   final _numberController = TextEditingController();
   final _totalController = TextEditingController();
   final _loyaltyController = TextEditingController();
@@ -31,7 +31,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyDimens().getNormalAppBar("Add Product", [], context, true),
+      appBar: MyDimens().getNormalAppBar("Add User Loyalty", [], context, true),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(12.w),
@@ -61,12 +61,19 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                 keyboardType: TextInputType.number,
               ),
               SizedBox(height: 24.h),
-              ProductAddSummaryDetails(
+              LoyaltyAddSummaryDetails(
                 loyaltyController: _loyaltyController,
                 getSubTotal: _getSubTotal,
                 getGrandTotal: _getGrandTotal,
               ),
               SizedBox(height: 30.h),
+              LoyaltyAddSubmitButton(
+                numberController: _numberController,
+                totalController: _totalController,
+                loyaltyController: _loyaltyController,
+                getSubTotal: double.parse(_getSubTotal),
+                getGrandTotal: double.parse(_getGrandTotal),
+              ),
             ],
           ),
         ),

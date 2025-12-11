@@ -48,7 +48,7 @@ abstract class AppTheme {
       ),
       backgroundColor: MyColor.surface,
       titleTextStyle: TextStyle(
-        color: MyColor.white,
+        color: MyColor.onSurface,
         fontSize: _isMobile(context) ? 16.sp : 18.sp,
         fontFamily: MyString.poppinsMedium,
         fontWeight: FontWeight.w600,

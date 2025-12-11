@@ -13,6 +13,19 @@ class MyDimens {
     ),
   ];
 
+  static BoxDecoration get getBoxDecoration => BoxDecoration(
+    color: MyColor.surfaceContainerLowest,
+    borderRadius: BorderRadius.circular(12.r),
+    border: Border.all(color: MyColor.outlineVariant, width: 1.w),
+    boxShadow: [
+      BoxShadow(
+        color: MyColor.gray200.withOpacity(0.3),
+        blurRadius: 8,
+        offset: const Offset(0, 2),
+      ),
+    ],
+  );
+
   static const cmDivider = Divider(color: MyColor.gray300, thickness: .5);
 
   AppBar getNormalAppBar(

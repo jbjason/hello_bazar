@@ -24,18 +24,18 @@ class HomeNavbar extends StatelessWidget {
         children: [
           //home icon
           _getNavBarItem(index: 0, width: itemWidth),
-          // // message icon
-          // _getNavBarItem(index: 1, width: itemWidth),
+          // message icon
+          _getNavBarItem(index: 1, width: itemWidth),
           // cart icon button
           HomeNavbarAddButton(
             itemWidth: itemWidth,
             bottomHeight: navBarHeight / 2,
           ),
 
-          // // file icon
-          // _getNavBarItem(index: 2, width: itemWidth),
+          // file icon
+          _getNavBarItem(index: 2, width: itemWidth),
           // people icon
-          _getNavBarItem(index: 1, width: itemWidth),
+          _getNavBarItem(index: 3, width: itemWidth),
         ],
       ),
     );

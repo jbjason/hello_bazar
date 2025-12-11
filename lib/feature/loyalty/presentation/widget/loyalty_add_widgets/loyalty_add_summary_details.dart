@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/util/my_dimens.dart';
-import 'package:hello_bazar/feature/product/presentation/screen/product_add_screen.dart';
+import 'package:hello_bazar/feature/loyalty/presentation/screen/loyalty_add_screen.dart';
 
-class ProductAddSummaryDetails extends StatelessWidget {
-  const ProductAddSummaryDetails({
+class LoyaltyAddSummaryDetails extends StatelessWidget {
+  const LoyaltyAddSummaryDetails({
     super.key,
     required this.loyaltyController,
     required this.getSubTotal,
@@ -17,7 +17,7 @@ class ProductAddSummaryDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(boxShadow: MyDimens.getShadow),
+      decoration: MyDimens.getBoxDecoration,
       child: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(

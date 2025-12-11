@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DashboardRecentList extends StatelessWidget {
-  const DashboardRecentList({super.key});
+class LoyaltyRecentList extends StatelessWidget {
+  const LoyaltyRecentList({super.key});
 
   @override
   Widget build(BuildContext context) {

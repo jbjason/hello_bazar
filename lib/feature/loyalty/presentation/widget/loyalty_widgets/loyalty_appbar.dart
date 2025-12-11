@@ -5,8 +5,8 @@ import 'package:hello_bazar/core/constants/my_icon.dart';
 import 'package:hello_bazar/core/constants/my_image.dart';
 import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_name_email_field.dart';
 
-class DashboardAppbar extends StatelessWidget {
-  const DashboardAppbar({super.key});
+class LoyaltyAppbar extends StatelessWidget {
+  const LoyaltyAppbar({super.key});
 
   @override
   Widget build(BuildContext context) {

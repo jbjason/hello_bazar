@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
-import 'package:hello_bazar/feature/product/presentation/screen/product_add_screen.dart';
+import 'package:hello_bazar/feature/loyalty/presentation/screen/loyalty_add_screen.dart';
 
 class HomeNavbarAddButton extends StatelessWidget {
   const HomeNavbarAddButton({
@@ -18,7 +18,7 @@ class HomeNavbarAddButton extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => ProductAddScreen()),
+          MaterialPageRoute(builder: (_) => LoyaltyAddScreen()),
         );
       },
       child: SizedBox(

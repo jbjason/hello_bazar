@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DashboardAllUserList extends StatelessWidget {
-  const DashboardAllUserList({super.key});
+class LoyaltyAllUserList extends StatelessWidget {
+  const LoyaltyAllUserList({super.key});
 
   @override
   Widget build(BuildContext context) {
