@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildBanner(BuildContext context) {
     return Container(
-      height: 180.h,
+      height: 160.h,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -250,6 +250,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 5.h),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
