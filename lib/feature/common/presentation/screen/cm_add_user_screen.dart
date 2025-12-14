@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
 import 'package:hello_bazar/feature/common/data/model/cm_user.dart';
+import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_name_email_field.dart';
+import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_number_field.dart';
 
 class CmAddUserScreen extends StatefulWidget {
   const CmAddUserScreen({super.key});
@@ -62,68 +64,34 @@ class _CmAddUserScreenState extends State<CmAddUserScreen> {
               children: [
                 // Header Card
                 _buildHeaderCard(),
-
                 SizedBox(height: 24.h),
-
                 // Profile Image Section
                 _buildImagePicker(),
-
                 SizedBox(height: 24.h),
-
                 // Basic Information
                 _buildSectionTitle('Basic Information'),
                 SizedBox(height: 16.h),
-
-                _buildTextField(
+                CmNameEmailField(
                   controller: _nameController,
                   label: 'Full Name',
-                  hint: 'Enter full name',
-                  icon: Icons.person_outline,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter name';
-                    }
-                    return null;
-                  },
+                  hintText: "Enter full name",
+                  prefixIcon: Icon(Icons.person_outline),
                 ),
-
                 SizedBox(height: 16.h),
-
-                _buildTextField(
+                CmNameEmailField(
                   controller: _emailController,
                   label: 'Email Address',
-                  hint: 'example@email.com',
-                  icon: Icons.email_outlined,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter email';
-                    }
-                    if (!value.contains('@')) {
-                      return 'Please enter valid email';
-                    }
-                    return null;
-                  },
+                  hintText: 'example@email.com',
+                  prefixIcon: Icon(Icons.email_outlined),
                 ),
-
                 SizedBox(height: 16.h),
-
-                _buildTextField(
+                CmNumberField(
                   controller: _mobileController,
                   label: 'Mobile Number',
-                  hint: '+880 XXXX-XXXXXX',
-                  icon: Icons.phone_outlined,
-                  keyboardType: TextInputType.phone,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter mobile number';
-                    }
-                    return null;
-                  },
+                  hintText: '+880 XXXX-XXXXXX',
+                  prefixIcon: Icon(Icons.phone_outlined),
                 ),
-
                 SizedBox(height: 16.h),
-
                 // Gender Selection
                 Text(
                   'Gender *',
@@ -133,37 +101,28 @@ class _CmAddUserScreenState extends State<CmAddUserScreen> {
                 ),
                 SizedBox(height: 8.h),
                 _buildGenderSelector(),
-
                 SizedBox(height: 24.h),
-
                 // Additional Information
                 _buildSectionTitle('Additional Information'),
                 SizedBox(height: 16.h),
-
-                _buildTextField(
+                CmNameEmailField(
                   controller: _addressController,
                   label: 'Address (Optional)',
-                  hint: 'Enter address',
-                  icon: Icons.location_on_outlined,
+                  hintText: 'Enter address',
+                  prefixIcon: Icon(Icons.location_on_outlined),
                   maxLines: 2,
                 ),
-
                 SizedBox(height: 16.h),
-
-                _buildTextField(
-                  controller: _nidController,
+                CmNameEmailField(
+                  controller: _emailController,
                   label: 'National ID (Optional)',
-                  hint: 'Enter NID number',
-                  icon: Icons.badge_outlined,
-                  keyboardType: TextInputType.number,
+                  hintText: 'Enter NID number',
+                  prefixIcon: Icon(Icons.badge_outlined),
                 ),
-
                 SizedBox(height: 24.h),
-
                 // User Type & Credit
                 _buildSectionTitle('User Settings'),
                 SizedBox(height: 16.h),
-
                 Text(
                   'User Type *',
                   style: Theme.of(
@@ -172,37 +131,27 @@ class _CmAddUserScreenState extends State<CmAddUserScreen> {
                 ),
                 SizedBox(height: 8.h),
                 _buildUserTypeSelector(),
-
                 SizedBox(height: 16.h),
-
-                _buildTextField(
-                  controller: _creditLimitController,
+                CmNumberField(
+                  controller: _mobileController,
                   label: 'Credit Limit (৳)',
-                  hint: '0.00',
-                  icon: Icons.account_balance_wallet_outlined,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  hintText: '0.00',
+                  prefixIcon: Icon(Icons.account_balance_wallet_outlined),
                 ),
-
                 SizedBox(height: 16.h),
-
                 // Active Status Toggle
                 _buildActiveStatusToggle(),
-
                 SizedBox(height: 16.h),
-
-                _buildTextField(
-                  controller: _notesController,
+                CmNameEmailField(
+                  controller: _emailController,
                   label: 'Notes (Optional)',
-                  hint: 'Add any additional notes...',
-                  icon: Icons.note_outlined,
+                  hintText: 'Add any additional notes...',
+                  prefixIcon: Icon(Icons.note_outlined),
                   maxLines: 4,
                 ),
-
                 SizedBox(height: 32.h),
-
                 // Action Buttons
                 _buildActionButtons(),
-
                 SizedBox(height: 16.h),
               ],
             ),
@@ -306,44 +255,6 @@ class _CmAddUserScreenState extends State<CmAddUserScreen> {
       style: Theme.of(
         context,
       ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-    );
-  }
-
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    required IconData icon,
-    TextInputType? keyboardType,
-    String? Function(String?)? validator,
-    int maxLines = 1,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-        ),
-        SizedBox(height: 8.h),
-        TextFormField(
-          controller: controller,
-          keyboardType: keyboardType,
-          maxLines: maxLines,
-          decoration: InputDecoration(
-            hintText: hint,
-            prefixIcon: maxLines > 1
-                ? Padding(
-                    padding: EdgeInsets.only(bottom: (maxLines * 20).h),
-                    child: Icon(icon),
-                  )
-                : Icon(icon),
-          ),
-          validator: validator,
-        ),
-      ],
     );
   }
 

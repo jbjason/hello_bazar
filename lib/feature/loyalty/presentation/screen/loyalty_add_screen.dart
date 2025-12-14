@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
+import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_name_email_field.dart';
+import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_number_field.dart';
 import 'package:hello_bazar/feature/loyalty/presentation/widget/loyalty_add_widgets/loyalty_add_summary_details.dart';
 
 class LoyaltyAddScreen extends StatefulWidget {
@@ -115,50 +117,63 @@ class _LoyaltyAddScreenState extends State<LoyaltyAddScreen> {
                 ),
                 SizedBox(height: 16.h),
                 // Name Field
-                Text(
-                  'Full Name *',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 8.h),
-                TextFormField(
+                CmNameEmailField(
                   controller: _nameController,
-                  decoration: InputDecoration(
-                    hintText: 'Enter customer name',
-                    prefixIcon: Icon(Icons.person_outline),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter customer name';
-                    }
-                    return null;
-                  },
+                  label: 'Full Name *',
+                  hintText: "Enter customer name",
+                  prefixIcon: Icon(Icons.person_outline),
                 ),
+                // Text(
+                //   'Full Name *',
+                //   style: Theme.of(
+                //     context,
+                //   ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                // ),
+                // SizedBox(height: 8.h),
+                // TextFormField(
+                //   controller: _nameController,
+                //   decoration: InputDecoration(
+                //     hintText: 'Enter customer name',
+                //     prefixIcon: Icon(Icons.person_outline),
+                //   ),
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter customer name';
+                //     }
+                //     return null;
+                //   },
+                // ),
                 SizedBox(height: 16.h),
                 // Phone Field
-                Text(
-                  'Phone Number *',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 8.h),
-                TextFormField(
+                CmNumberField(
                   controller: _numberController,
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    hintText: '+880 XXXX-XXXXXX',
-                    prefixIcon: Icon(Icons.phone_outlined),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter phone number';
-                    }
-                    return null;
-                  },
+                  label: 'Phone Number *',
+                  hintText: '+880 XXXX-XXXXXX',
+                  prefixIcon: Icon(Icons.phone_outlined),
                 ),
+                // Text(
+                //   'Phone Number *',
+                //   style: Theme.of(
+                //     context,
+                //   ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                // ),
+                // SizedBox(height: 8.h),
+                // TextFormField(
+                //   controller: _numberController,
+                //   keyboardType: TextInputType.phone,
+                //   decoration: InputDecoration(
+                //     hintText: '+880 XXXX-XXXXXX',
+                //     prefixIcon: Icon(Icons.phone_outlined),
+                //   ),
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter phone number';
+                //     }
+                //     return null;
+                //   },
+                // ),
                 SizedBox(height: 24.h),
+
                 // Due Details Section
                 Text(
                   'Amount Details',
@@ -168,30 +183,36 @@ class _LoyaltyAddScreenState extends State<LoyaltyAddScreen> {
                 ),
                 SizedBox(height: 16.h),
                 // Amount Field
-                Text(
-                  'Total Amount (৳) *',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 8.h),
-                TextFormField(
+                CmNumberField(
                   controller: _totalController,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  decoration: InputDecoration(
-                    hintText: '0.00',
-                    prefixIcon: Icon(Icons.attach_money),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter due amount';
-                    }
-                    if (double.tryParse(value) == null) {
-                      return 'Please enter a valid amount';
-                    }
-                    return null;
-                  },
+                  label: 'Total Amount (৳) *',
+                  hintText: '0.00',
+                  prefixIcon: Icon(Icons.attach_money),
                 ),
+                // Text(
+                //   'Total Amount (৳) *',
+                //   style: Theme.of(
+                //     context,
+                //   ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                // ),
+                // SizedBox(height: 8.h),
+                // TextFormField(
+                //   controller: _totalController,
+                //   keyboardType: TextInputType.numberWithOptions(decimal: true),
+                //   decoration: InputDecoration(
+                //     hintText: '0.00',
+                //     prefixIcon: Icon(Icons.attach_money),
+                //   ),
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter due amount';
+                //     }
+                //     if (double.tryParse(value) == null) {
+                //       return 'Please enter a valid amount';
+                //     }
+                //     return null;
+                //   },
+                // ),
                 SizedBox(height: 16.h),
                 // summary
                 LoyaltyAddSummaryDetails(

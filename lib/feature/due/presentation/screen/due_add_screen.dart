@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
-
+import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_name_email_field.dart';
+import 'package:hello_bazar/feature/common/presentation/widget/textfield_widgets/cm_number_field.dart';
 
 class DueAddScreen extends StatefulWidget {
   const DueAddScreen({super.key});
@@ -101,7 +102,6 @@ class _DueAddScreenState extends State<DueAddScreen> {
                 ),
 
                 SizedBox(height: 24.h),
-
                 // Customer Information Section
                 Text(
                   'Customer Information',
@@ -110,56 +110,22 @@ class _DueAddScreenState extends State<DueAddScreen> {
                   ),
                 ),
                 SizedBox(height: 16.h),
-
                 // Name Field
-                Text(
-                  'Full Name *',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 8.h),
-                TextFormField(
+                CmNameEmailField(
                   controller: _nameController,
-                  decoration: InputDecoration(
-                    hintText: 'Enter customer name',
-                    prefixIcon: Icon(Icons.person_outline),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter customer name';
-                    }
-                    return null;
-                  },
+                  label: 'Full Name *',
+                  hintText: 'Enter customer name',
+                  prefixIcon: Icon(Icons.person_outline),
                 ),
-
                 SizedBox(height: 16.h),
-
                 // Phone Field
-                Text(
-                  'Phone Number *',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 8.h),
-                TextFormField(
+                CmNumberField(
                   controller: _phoneController,
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    hintText: '+880 XXXX-XXXXXX',
-                    prefixIcon: Icon(Icons.phone_outlined),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter phone number';
-                    }
-                    return null;
-                  },
+                  label: 'Phone Number *',
+                  hintText: '+880 XXXX-XXXXXX',
+                  prefixIcon: Icon(Icons.phone_outlined),
                 ),
-
                 SizedBox(height: 24.h),
-
                 // Due Details Section
                 Text(
                   'Due Details',
@@ -168,57 +134,23 @@ class _DueAddScreenState extends State<DueAddScreen> {
                   ),
                 ),
                 SizedBox(height: 16.h),
-
                 // Amount Field
-                Text(
-                  'Due Amount (৳) *',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 8.h),
-                TextFormField(
+                CmNumberField(
                   controller: _amountController,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  decoration: InputDecoration(
-                    hintText: '0.00',
-                    prefixIcon: Icon(Icons.attach_money),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter due amount';
-                    }
-                    if (double.tryParse(value) == null) {
-                      return 'Please enter a valid amount';
-                    }
-                    return null;
-                  },
+                  label: 'Due Amount (৳) *',
+                  hintText: '0.00',
+                  prefixIcon: Icon(Icons.attach_money),
                 ),
-
                 SizedBox(height: 16.h),
-
                 // Notes Field
-                Text(
-                  'Notes (Optional)',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 8.h),
-                TextFormField(
+                CmNameEmailField(
                   controller: _notesController,
+                  label: 'Notes (Optional)',
+                  hintText: 'Add any additional notes...',
+                  prefixIcon: Icon(Icons.note_outlined),
                   maxLines: 4,
-                  decoration: InputDecoration(
-                    hintText: 'Add any additional notes...',
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.only(bottom: 60.h),
-                      child: Icon(Icons.note_outlined),
-                    ),
-                  ),
                 ),
-
                 SizedBox(height: 32.h),
-
                 // Action Buttons
                 Row(
                   children: [
