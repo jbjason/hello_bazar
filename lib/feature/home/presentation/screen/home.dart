@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
+import 'package:hello_bazar/feature/ledger/presentation/screen/ledger_screen.dart';
 import 'package:hello_bazar/feature/loyalty/presentation/screen/loyalty_screen.dart';
 import 'package:hello_bazar/feature/due/presentation/screen/due_screen.dart';
 import 'package:hello_bazar/feature/home/presentation/screen/home_screen.dart';
@@ -17,7 +18,7 @@ class _HomeState extends State<Home> {
     HomeScreen(),
     LoyaltyScreen(),
     DueScreen(),
-    Center(child: Text("Coming Soon")), // CustomerScreen(),
+    LedgerScreen(), //Center(child: Text("Coming Soon")),
     ProfileScreen(),
   ];
   dynamic _currentPage = 0;

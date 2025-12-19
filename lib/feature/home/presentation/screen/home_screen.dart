@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
 import 'package:hello_bazar/core/util/my_dimens.dart';
 import 'package:hello_bazar/feature/customer/presentation/screen/customer_screen.dart';
+import 'package:hello_bazar/feature/ledger/presentation/screen/ledger_screen.dart';
 import 'package:hello_bazar/feature/sales/presentation/screen/sales_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -198,14 +199,22 @@ class HomeScreen extends StatelessWidget {
                 isPositive: true,
               ),
             ),
-            _buildStatCard(
-              context: context,
-              title: 'Revenue',
-              value: '৳ 8,942',
-              icon: Icons.trending_up_outlined,
-              color: MyColor.error,
-              percentage: '-2.4%',
-              isPositive: false,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => LedgerScreen()),
+                );
+              },
+              child: _buildStatCard(
+                context: context,
+                title: 'Revenue',
+                value: '৳ 8,942',
+                icon: Icons.trending_up_outlined,
+                color: MyColor.error,
+                percentage: '-2.4%',
+                isPositive: false,
+              ),
             ),
           ],
         ),
