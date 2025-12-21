@@ -5,6 +5,7 @@ import 'package:hello_bazar/core/util/my_dimens.dart';
 import 'package:hello_bazar/feature/customer/presentation/screen/customer_screen.dart';
 import 'package:hello_bazar/feature/ledger/presentation/screen/ledger_screen.dart';
 import 'package:hello_bazar/feature/profit_loss/presentation/screen/profit_loss_screen.dart';
+import 'package:hello_bazar/feature/purchase/presentation/widget/purchase_screen.dart';
 import 'package:hello_bazar/feature/sales/presentation/screen/sales_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -212,7 +213,7 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => LedgerScreen()),
+                  MaterialPageRoute(builder: (_) => PurchaseScreen()),
                 );
               },
               child: _buildStatCard(

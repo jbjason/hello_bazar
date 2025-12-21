@@ -5,6 +5,7 @@ import 'package:hello_bazar/feature/loyalty/presentation/screen/loyalty_screen.d
 import 'package:hello_bazar/feature/due/presentation/screen/due_screen.dart';
 import 'package:hello_bazar/feature/home/presentation/screen/home_screen.dart';
 import 'package:hello_bazar/feature/home/presentation/widget/home_navbar.dart';
+import 'package:hello_bazar/feature/product/presentation/screen/product_screen.dart';
 import 'package:hello_bazar/feature/profile/presentation/screen/profile_screen.dart';
 
 class Home extends StatefulWidget {
@@ -19,6 +20,7 @@ class _HomeState extends State<Home> {
     LoyaltyScreen(),
     DueScreen(),
     LedgerScreen(), //Center(child: Text("Coming Soon")),
+    ProductScreen(),
     ProfileScreen(),
   ];
   dynamic _currentPage = 0;
