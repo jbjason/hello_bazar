@@ -4,9 +4,12 @@ import 'package:hello_bazar/core/constants/my_color.dart';
 import 'package:hello_bazar/core/util/my_dimens.dart';
 import 'package:hello_bazar/feature/customer/presentation/screen/customer_screen.dart';
 import 'package:hello_bazar/feature/ledger/presentation/screen/ledger_screen.dart';
+import 'package:hello_bazar/feature/product/presentation/screen/product_screen.dart';
 import 'package:hello_bazar/feature/profit_loss/presentation/screen/profit_loss_screen.dart';
 import 'package:hello_bazar/feature/purchase/presentation/widget/purchase_screen.dart';
 import 'package:hello_bazar/feature/sales/presentation/screen/sales_screen.dart';
+import 'package:hello_bazar/feature/stock/presentation/screen/stock_screen.dart';
+import 'package:hello_bazar/feature/warehouse/presentation/screen/warehouse_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -184,7 +187,7 @@ class HomeScreen extends StatelessWidget {
               },
               child: _buildStatCard(
                 context: context,
-                title: 'Orders',
+                title: 'Profit/Loss',
                 value: '342',
                 icon: Icons.receipt_long_outlined,
                 color: const Color(0xFF0984E3),
@@ -218,7 +221,75 @@ class HomeScreen extends StatelessWidget {
               },
               child: _buildStatCard(
                 context: context,
-                title: 'Revenue',
+                title: 'Purchase',
+                value: '৳ 8,942',
+                icon: Icons.trending_up_outlined,
+                color: MyColor.error,
+                percentage: '-2.4%',
+                isPositive: false,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => ProductScreen()),
+                );
+              },
+              child: _buildStatCard(
+                context: context,
+                title: 'Products',
+                value: '1,256',
+                icon: Icons.people_outline,
+                color: MyColor.warning,
+                percentage: '+12.3%',
+                isPositive: true,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => StockScreen()),
+                );
+              },
+              child: _buildStatCard(
+                context: context,
+                title: 'Stock',
+                value: '৳ 8,942',
+                icon: Icons.trending_up_outlined,
+                color: MyColor.success,
+                percentage: '-2.4%',
+                isPositive: false,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => LedgerScreen()),
+                );
+              },
+              child: _buildStatCard(
+                context: context,
+                title: 'Ledger',
+                value: '1,256',
+                icon: Icons.people_outline,
+                color: MyColor.success,
+                percentage: '+12.3%',
+                isPositive: true,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => WarehouseScreen()),
+                );
+              },
+              child: _buildStatCard(
+                context: context,
+                title: 'WareHouse',
                 value: '৳ 8,942',
                 icon: Icons.trending_up_outlined,
                 color: MyColor.error,

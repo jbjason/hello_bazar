@@ -35,10 +35,8 @@ class HomeNavbar extends StatelessWidget {
           // file icon
           _getNavBarItem(index: 3, width: itemWidth),
 
-          _getNavBarItem(index: 4, width: itemWidth),
-
           // people icon
-          _getNavBarItem(index: 5, width: itemWidth),
+          _getNavBarItem(index: 4, width: itemWidth),
         ],
       ),
     );
