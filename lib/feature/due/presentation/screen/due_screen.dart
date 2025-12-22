@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
-import 'package:hello_bazar/core/util/my_dimens.dart';
 import 'package:hello_bazar/feature/due/data/model/due_user.dart';
-import 'package:hello_bazar/feature/due/presentation/screen/due_add_screen.dart';
 import 'package:hello_bazar/feature/due/presentation/screen/due_user_details_screen.dart';
 
 class DueScreen extends StatefulWidget {
@@ -68,165 +66,177 @@ class _DueScreenState extends State<DueScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        MyDimens().getNormalAppBar("Due List", [
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: MyColor.surface,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: MyColor.onSurfaceVariant),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text('Due List', style: Theme.of(context).textTheme.titleLarge),
+        actions: [
           IconButton(
-            icon: Icon(Icons.add, color: MyColor.onSurfaceVariant),
+            icon: Icon(Icons.calendar_today, color: MyColor.onSurfaceVariant),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const DueAddScreen()),
-              );
+              // Show date picker
             },
+          ),
+          IconButton(
+            icon: Icon(Icons.more_vert, color: MyColor.onSurfaceVariant),
+            onPressed: () {},
           ),
           SizedBox(width: 8.w),
-        ], context),
-        // Summary Card
-        Container(
-          margin: EdgeInsets.all(12.w),
-          padding: EdgeInsets.all(20.w),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [MyColor.primary, MyColor.primary.withOpacity(0.85)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+        ],
+      ),
+      body: Column(
+        children: [
+          // Summary Card
+          Container(
+            margin: EdgeInsets.all(12.w),
+            padding: EdgeInsets.all(20.w),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [MyColor.primary, MyColor.primary.withOpacity(0.85)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(16.r),
+              boxShadow: [
+                BoxShadow(
+                  color: MyColor.primary.withOpacity(0.3),
+                  blurRadius: 12,
+                  offset: const Offset(0, 6),
+                ),
+              ],
             ),
-            borderRadius: BorderRadius.circular(16.r),
-            boxShadow: [
-              BoxShadow(
-                color: MyColor.primary.withOpacity(0.3),
-                blurRadius: 12,
-                offset: const Offset(0, 6),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total Due Amount',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: MyColor.onPrimary.withOpacity(0.9),
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    '৳${_totalDue.toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                      color: MyColor.onPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.all(16.w),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Icon(
-                  Icons.account_balance_wallet,
-                  color: MyColor.onPrimary,
-                  size: 32.sp,
-                ),
-              ),
-            ],
-          ),
-        ),
-
-        // Search Bar
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: TextField(
-            controller: _searchController,
-            onTapOutside: (event) => FocusScope.of(context).unfocus(),
-            onChanged: (value) {
-              setState(() {
-                _searchQuery = value;
-              });
-            },
-            decoration: InputDecoration(
-              hintText: 'Search by name or phone',
-              prefixIcon: Icon(Icons.search, color: MyColor.outline),
-              suffixIcon: _searchQuery.isNotEmpty
-                  ? IconButton(
-                      icon: Icon(Icons.clear, color: MyColor.outline),
-                      onPressed: () {
-                        setState(() {
-                          _searchController.clear();
-                          _searchQuery = '';
-                        });
-                      },
-                    )
-                  : null,
-            ),
-          ),
-        ),
-
-        SizedBox(height: 16.h),
-
-        // User Count
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '${_filteredUsers.length} Users',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: MyColor.gray600,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Text(
-                'Sort by: Amount',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: MyColor.primary,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ),
-
-        SizedBox(height: 12.h),
-
-        // Due Users List
-        Expanded(
-          child: _filteredUsers.isEmpty
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search_off,
-                        size: 64.sp,
-                        color: MyColor.gray300,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Total Due Amount',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: MyColor.onPrimary.withOpacity(0.9),
                       ),
-                      SizedBox(height: 16.h),
-                      Text(
-                        'No users found',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: MyColor.gray500,
+                    ),
+                    SizedBox(height: 8.h),
+                    Text(
+                      '৳${_totalDue.toStringAsFixed(2)}',
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                        color: MyColor.onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.all(16.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Icon(
+                    Icons.account_balance_wallet,
+                    color: MyColor.onPrimary,
+                    size: 32.sp,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      
+          // Search Bar
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: TextField(
+              controller: _searchController,
+              onTapOutside: (event) => FocusScope.of(context).unfocus(),
+              onChanged: (value) {
+                setState(() {
+                  _searchQuery = value;
+                });
+              },
+              decoration: InputDecoration(
+                hintText: 'Search by name or phone',
+                prefixIcon: Icon(Icons.search, color: MyColor.outline),
+                suffixIcon: _searchQuery.isNotEmpty
+                    ? IconButton(
+                        icon: Icon(Icons.clear, color: MyColor.outline),
+                        onPressed: () {
+                          setState(() {
+                            _searchController.clear();
+                            _searchQuery = '';
+                          });
+                        },
+                      )
+                    : null,
+              ),
+            ),
+          ),
+      
+          SizedBox(height: 16.h),
+      
+          // User Count
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${_filteredUsers.length} Users',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: MyColor.gray600,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  'Sort by: Amount',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: MyColor.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      
+          SizedBox(height: 12.h),
+      
+          // Due Users List
+          Expanded(
+            child: _filteredUsers.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.search_off,
+                          size: 64.sp,
+                          color: MyColor.gray300,
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 16.h),
+                        Text(
+                          'No users found',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: MyColor.gray500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    itemCount: _filteredUsers.length,
+                    itemBuilder: (context, index) {
+                      return _buildDueUserCard(_filteredUsers[index]);
+                    },
                   ),
-                )
-              : ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  itemCount: _filteredUsers.length,
-                  itemBuilder: (context, index) {
-                    return _buildDueUserCard(_filteredUsers[index]);
-                  },
-                ),
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 

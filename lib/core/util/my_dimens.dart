@@ -39,9 +39,10 @@ class MyDimens {
             onPressed: () => Navigator.pop(ctx),
             icon: const Icon(Icons.arrow_back_ios_new),
           )
-        : const SizedBox(),
+        : null,
     title: Text(title),
-    centerTitle: true,
+    automaticallyImplyLeading: false,
+    //centerTitle: true,
     actions: actions,
     backgroundColor: MyColor.primary,
   );

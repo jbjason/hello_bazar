@@ -17,8 +17,10 @@ class _HomeState extends State<Home> {
   final _pages = [
     HomeScreen(),
     LoyaltyScreen(),
-    DueScreen(),
-    LedgerScreen(), //Center(child: Text("Coming Soon")),
+    // DueScreen(),
+    Center(child: Text("Coming Soon")),
+    // DueScreen(),
+    Center(child: Text("Coming Soon")),
     ProfileScreen(),
   ];
   dynamic _currentPage = 0;

@@ -3,10 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
 import 'package:hello_bazar/core/util/my_dimens.dart';
 import 'package:hello_bazar/feature/customer/presentation/screen/customer_screen.dart';
+import 'package:hello_bazar/feature/due/presentation/screen/due_screen.dart';
 import 'package:hello_bazar/feature/ledger/presentation/screen/ledger_screen.dart';
 import 'package:hello_bazar/feature/product/presentation/screen/product_screen.dart';
 import 'package:hello_bazar/feature/profit_loss/presentation/screen/profit_loss_screen.dart';
-import 'package:hello_bazar/feature/purchase/presentation/widget/purchase_screen.dart';
+import 'package:hello_bazar/feature/purchase/presentation/screen/purchase_screen.dart';
 import 'package:hello_bazar/feature/sales/presentation/screen/sales_screen.dart';
 import 'package:hello_bazar/feature/stock/presentation/screen/stock_screen.dart';
 import 'package:hello_bazar/feature/warehouse/presentation/screen/warehouse_screen.dart';
@@ -31,22 +32,23 @@ class HomeScreen extends StatelessWidget {
         Expanded(
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(12.w),
+              padding: EdgeInsets.all(11.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Welcome Banner
                   _buildBanner(context),
-                  SizedBox(height: 30.h),
-                  Text(
-                    'Today\'s Overview',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  SizedBox(height: 10.h),
-
-                  _buildStatsGrid(context),
-
                   SizedBox(height: 24.h),
 
+                  // Statistics Overview
+                  _buildStatisticsOverview(context),
+                  SizedBox(height: 24.h),
+
+                  // Quick Access Categories
+                  _buildCategoriesGrid(context),
+                  SizedBox(height: 24.h),
+
+                  // Recent Activity
                   _buildRecentActivity(context),
                 ],
               ),
@@ -59,31 +61,30 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildBanner(BuildContext context) {
     return Container(
-      //   height: 160.h,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [MyColor.primary, MyColor.primary.withOpacity(0.8)],
+          colors: [MyColor.primary, MyColor.primaryContainer],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: MyColor.primary.withOpacity(0.3),
+            color: MyColor.primary.withOpacity(0.2),
             blurRadius: 20,
-            offset: const Offset(0, 10),
+            offset: const Offset(0, 8),
           ),
         ],
       ),
       child: Stack(
         children: [
           Positioned(
-            right: -20,
-            top: -20,
+            right: -30.w,
+            top: -30.h,
             child: Container(
-              width: 150.w,
-              height: 150.h,
+              width: 120.w,
+              height: 120.h,
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.1),
                 shape: BoxShape.circle,
@@ -91,11 +92,11 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: -30,
-            bottom: -30,
+            left: -20.w,
+            bottom: -20.h,
             child: Container(
-              width: 120.w,
-              height: 120.h,
+              width: 80.w,
+              height: 80.h,
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.1),
                 shape: BoxShape.circle,
@@ -106,24 +107,23 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.all(24.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Welcome Back! 👋',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: MyColor.onPrimary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  'Your Store is Performing Great!',
+                  'Track your daily store performance',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: MyColor.onPrimary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 16.w,
@@ -133,12 +133,23 @@ class HomeScreen extends StatelessWidget {
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20.r),
                   ),
-                  child: Text(
-                    '📈 +12.5% from yesterday',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: MyColor.onPrimary,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.trending_up,
+                        color: MyColor.onPrimary,
+                        size: 16.w,
+                      ),
+                      SizedBox(width: 6.w),
+                      Text(
+                        '+12.5% from yesterday',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: MyColor.onPrimary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -149,155 +160,170 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatsGrid(BuildContext context) {
+  Widget _buildStatisticsOverview(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          'Today\'s Overview',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        SizedBox(height: 10.h),
         GridView.count(
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
-          mainAxisSpacing: 16.h,
-          crossAxisSpacing: 16.w,
+          mainAxisSpacing: 12.h,
+          crossAxisSpacing: 12.w,
           childAspectRatio: 1.4,
           children: [
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => SalesScreen()),
-                );
-              },
-              child: _buildStatCard(
-                context: context,
-                title: 'Total Sales',
-                value: '৳ 12,458',
-                icon: Icons.shopping_bag_outlined,
-                color: MyColor.success,
-                percentage: '+8.2%',
-                isPositive: true,
-              ),
+            _buildStatCard(
+              context: context,
+              title: 'Today\'s Sales',
+              value: '৳ 12,458',
+              icon: Icons.shopping_cart_outlined,
+              color: MyColor.success,
+              trend: '+8.2%',
+              isPositive: true,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => ProfitLossScreen()),
-                );
-              },
-              child: _buildStatCard(
-                context: context,
-                title: 'Profit/Loss',
-                value: '342',
-                icon: Icons.receipt_long_outlined,
-                color: const Color(0xFF0984E3),
-                percentage: '+5.1%',
-                isPositive: true,
-              ),
+            _buildStatCard(
+              context: context,
+              title: 'Daily Profit',
+              value: '৳ 3,245',
+              icon: Icons.attach_money_outlined,
+              color: const Color(0xFF10B981),
+              trend: '+5.1%',
+              isPositive: true,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => CustomerScreen()),
-                );
-              },
-              child: _buildStatCard(
-                context: context,
-                title: 'Customers',
-                value: '1,256',
-                icon: Icons.people_outline,
-                color: MyColor.warning,
-                percentage: '+12.3%',
-                isPositive: true,
-              ),
+            _buildStatCard(
+              context: context,
+              title: 'Total Due',
+              value: '৳ 8,520',
+              icon: Icons.credit_card_outlined,
+              color: MyColor.warning,
+              trend: '-2.4%',
+              isPositive: false,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => PurchaseScreen()),
-                );
-              },
-              child: _buildStatCard(
-                context: context,
-                title: 'Purchase',
-                value: '৳ 8,942',
-                icon: Icons.trending_up_outlined,
-                color: MyColor.error,
-                percentage: '-2.4%',
-                isPositive: false,
-              ),
+            _buildStatCard(
+              context: context,
+              title: 'Customers Today',
+              value: '48',
+              icon: Icons.people_outline,
+              color: MyColor.primary,
+              trend: '+12.3%',
+              isPositive: true,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCategoriesGrid(BuildContext context) {
+    final categories = [
+      {
+        'title': 'Product',
+        'icon': Icons.inventory_2_outlined,
+        'color': MyColor.primary,
+        'screen': ProductScreen(),
+      },
+      {
+        'title': 'Customer',
+        'icon': Icons.people_outlined,
+        'color': const Color(0xFF10B981),
+        'screen': CustomerScreen(),
+      },
+      {
+        'title': 'Due',
+        'icon': Icons.credit_card_outlined,
+        'color': MyColor.warning,
+        'screen': DueScreen(),
+      },
+      {
+        'title': 'Ledger',
+        'icon': Icons.book_outlined,
+        'color': const Color(0xFF6366F1),
+        'screen': LedgerScreen(),
+      },
+      {
+        'title': 'Profit / Loss',
+        'icon': Icons.bar_chart_outlined,
+        'color': const Color(0xFF059669),
+        'screen': ProfitLossScreen(),
+      },
+      {
+        'title': 'Purchase',
+        'icon': Icons.shopping_bag_outlined,
+        'color': const Color(0xFF8B5CF6),
+        'screen': PurchaseScreen(),
+      },
+      {
+        'title': 'Sales',
+        'icon': Icons.point_of_sale_outlined,
+        'color': MyColor.success,
+        'screen': SalesScreen(),
+      },
+      {
+        'title': 'Stock',
+        'icon': Icons.warehouse_outlined,
+        'color': const Color(0xFF0EA5E9),
+        'screen': StockScreen(),
+      },
+      {
+        'title': 'Warehouse',
+        'icon': Icons.store_outlined,
+        'color': const Color(0xFFF97316),
+        'screen': WarehouseScreen(),
+      },
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Quick Access', style: Theme.of(context).textTheme.titleLarge),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                'View All',
+                style: Theme.of(
                   context,
-                  MaterialPageRoute(builder: (_) => ProductScreen()),
-                );
-              },
-              child: _buildStatCard(
-                context: context,
-                title: 'Products',
-                value: '1,256',
-                icon: Icons.people_outline,
-                color: MyColor.warning,
-                percentage: '+12.3%',
-                isPositive: true,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => StockScreen()),
-                );
-              },
-              child: _buildStatCard(
-                context: context,
-                title: 'Stock',
-                value: '৳ 8,942',
-                icon: Icons.trending_up_outlined,
-                color: MyColor.success,
-                percentage: '-2.4%',
-                isPositive: false,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => LedgerScreen()),
-                );
-              },
-              child: _buildStatCard(
-                context: context,
-                title: 'Ledger',
-                value: '1,256',
-                icon: Icons.people_outline,
-                color: MyColor.success,
-                percentage: '+12.3%',
-                isPositive: true,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => WarehouseScreen()),
-                );
-              },
-              child: _buildStatCard(
-                context: context,
-                title: 'WareHouse',
-                value: '৳ 8,942',
-                icon: Icons.trending_up_outlined,
-                color: MyColor.error,
-                percentage: '-2.4%',
-                isPositive: false,
+                ).textTheme.labelLarge?.copyWith(color: MyColor.primary),
               ),
             ),
           ],
+        ),
+        GridView.builder(
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 12.h,
+            crossAxisSpacing: 12.w,
+            childAspectRatio: 0.9,
+          ),
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            final category = categories[index];
+            return _buildCategoryCard(
+              context: context,
+              title: category['title'] as String,
+              icon: category['icon'] as IconData,
+              color: category['color'] as Color,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => category['screen'] as Widget,
+                  ),
+                );
+              },
+            );
+          },
         ),
       ],
     );
@@ -309,89 +335,14 @@ class HomeScreen extends StatelessWidget {
     required String value,
     required IconData icon,
     required Color color,
-    required String percentage,
+    required String trend,
     required bool isPositive,
   }) {
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: MyColor.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: MyColor.outlineVariant, width: 1.w),
-        boxShadow: [
-          BoxShadow(
-            color: MyColor.gray200.withOpacity(0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(8.w),
-                  decoration: BoxDecoration(
-                    color: color.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Icon(icon, color: color, size: 20.sp),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                  decoration: BoxDecoration(
-                    color: isPositive
-                        ? MyColor.success.withOpacity(0.1)
-                        : MyColor.error.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Text(
-                    percentage,
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: isPositive ? MyColor.success : MyColor.error,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 5.h),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  value,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  title,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodySmall?.copyWith(color: MyColor.gray500),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRecentActivity(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        color: MyColor.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: MyColor.outlineVariant, width: 1.w),
         boxShadow: [
           BoxShadow(
@@ -403,35 +354,158 @@ class HomeScreen extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.all(8.w),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Icon(icon, color: color, size: 20.w),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                decoration: BoxDecoration(
+                  color: isPositive
+                      ? MyColor.success.withOpacity(0.1)
+                      : MyColor.error.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      isPositive ? Icons.arrow_upward : Icons.arrow_downward,
+                      size: 12.w,
+                      color: isPositive ? MyColor.success : MyColor.error,
+                    ),
+                    SizedBox(width: 4.w),
+                    Text(
+                      trend,
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: isPositive ? MyColor.success : MyColor.error,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          SizedBox(height: 8.h),
+          Expanded(
+            child: Text(
+              value,
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Text(
+            title,
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: MyColor.gray500),
+            //   ),
+            // ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryCard({
+    required BuildContext context,
+    required String title,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12.r),
+      child: Container(
+        decoration: BoxDecoration(
+          color: MyColor.surfaceContainerLowest,
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(color: MyColor.outlineVariant, width: 1.w),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.all(12.w),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: color, size: 24.w),
+            ),
+            SizedBox(height: 8.h),
+            Text(
+              title,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRecentActivity(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: MyColor.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: MyColor.outlineVariant, width: 1.w),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Recent Activity',
             style: Theme.of(
               context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 16.h),
           _buildActivityItem(
             context: context,
-            icon: Icons.check_circle_outline,
-            title: 'New order received',
-            subtitle: '2 minutes ago',
+            icon: Icons.shopping_cart_checkout_outlined,
+            title: 'New Sale Completed',
+            subtitle: 'Order #2456 - ৳ 2,450',
+            time: '10 min ago',
             color: MyColor.success,
           ),
           Divider(height: 24.h, color: MyColor.outlineVariant),
           _buildActivityItem(
             context: context,
-            icon: Icons.person_add_outlined,
-            title: 'New customer registered',
-            subtitle: '15 minutes ago',
-            color: const Color(0xFF0984E3),
+            icon: Icons.person_add_alt_1_outlined,
+            title: 'New Customer Added',
+            subtitle: 'John Doe registered',
+            time: '25 min ago',
+            color: MyColor.primary,
           ),
           Divider(height: 24.h, color: MyColor.outlineVariant),
           _buildActivityItem(
             context: context,
-            icon: Icons.inventory_2_outlined,
-            title: 'Low stock alert',
-            subtitle: '1 hour ago',
+            icon: Icons.inventory_outlined,
+            title: 'Low Stock Alert',
+            subtitle: 'Product #1234 needs restocking',
+            time: '1 hour ago',
             color: MyColor.warning,
           ),
         ],
@@ -444,6 +518,7 @@ class HomeScreen extends StatelessWidget {
     required IconData icon,
     required String title,
     required String subtitle,
+    required String time,
     required Color color,
   }) {
     return Row(
@@ -454,7 +529,7 @@ class HomeScreen extends StatelessWidget {
             color: color.withOpacity(0.1),
             borderRadius: BorderRadius.circular(8.r),
           ),
-          child: Icon(icon, color: color, size: 20.sp),
+          child: Icon(icon, color: color, size: 20.w),
         ),
         SizedBox(width: 12.w),
         Expanded(
@@ -465,7 +540,7 @@ class HomeScreen extends StatelessWidget {
                 title,
                 style: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 2.h),
               Text(
@@ -476,6 +551,12 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        Text(
+          time,
+          style: Theme.of(
+            context,
+          ).textTheme.labelSmall?.copyWith(color: MyColor.gray400),
         ),
       ],
     );
