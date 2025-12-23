@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
+import 'package:hello_bazar/feature/purchase/presentation/screen/purchase_add_screen.dart';
 
 class PurchaseScreen extends StatefulWidget {
   const PurchaseScreen({super.key});
@@ -283,7 +284,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddPurchasePage()),
+            MaterialPageRoute(builder: (context) => PurchaseAddScreen()),
           );
         },
         backgroundColor: MyColor.primary,
@@ -871,17 +872,4 @@ class PurchaseItem {
   });
 
   double get total => quantity * price;
-}
-
-// Placeholder for AddPurchasePage
-class AddPurchasePage extends StatelessWidget {
-  const AddPurchasePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('New Purchase')),
-      body: Center(child: Text('Add Purchase Form Here')),
-    );
-  }
 }

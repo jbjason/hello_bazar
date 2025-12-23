@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
+import 'package:hello_bazar/feature/ledger/presentation/screen/ledger_add_screen.dart';
 
 class LedgerScreen extends StatefulWidget {
   const LedgerScreen({super.key});
@@ -276,21 +277,15 @@ class _LedgerScreenState extends State<LedgerScreen> {
                       return _buildLedgerCard(_filteredEntries[index]);
                     },
                   ),
-            // child: _filteredEntries.isEmpty
-            //     ? _buildEmptyState()
-            //     : ListView.builder(
-            //         padding: EdgeInsets.symmetric(horizontal: 16.w),
-            //         itemCount: _filteredEntries.length,
-            //         itemBuilder: (context, index) {
-            //           return _buildLedgerCard(_filteredEntries[index]);
-            //         },
-            //       ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          _showAddEntryDialog();
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LedgerAddScreen()),
+          );
         },
         backgroundColor: MyColor.primary,
         icon: Icon(Icons.add, color: MyColor.onPrimary),
@@ -734,35 +729,6 @@ class _LedgerScreenState extends State<LedgerScreen> {
             style: Theme.of(
               context,
             ).textTheme.bodySmall?.copyWith(color: MyColor.gray500),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showAddEntryDialog() {
-    // Show dialog to add new ledger entry
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Add Ledger Entry'),
-        content: Text('Entry form will be here'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Entry added successfully!'),
-                  backgroundColor: MyColor.success,
-                ),
-              );
-            },
-            child: Text('Add'),
           ),
         ],
       ),

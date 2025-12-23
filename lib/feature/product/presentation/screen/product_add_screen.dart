@@ -106,6 +106,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                 SizedBox(height: 16.h),
 
                 Row(
+                  spacing: 12.w,
                   children: [
                     Expanded(
                       child: _buildTextField(
@@ -121,16 +122,14 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                         },
                       ),
                     ),
-                    SizedBox(width: 12.w),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Category *',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                           SizedBox(height: 8.h),
                           _buildCategoryDropdown(),
@@ -170,7 +169,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                         label: 'Selling Price (৳)',
                         hint: '0.00',
                         icon: Icons.attach_money,
-                        keyboardType: TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Enter price';
@@ -189,7 +190,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                         label: 'Cost Price (৳)',
                         hint: '0.00',
                         icon: Icons.money_off,
-                        keyboardType: TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Enter cost';
@@ -207,7 +210,8 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                 SizedBox(height: 12.h),
 
                 // Profit Display
-                if (_priceController.text.isNotEmpty && _costController.text.isNotEmpty)
+                if (_priceController.text.isNotEmpty &&
+                    _costController.text.isNotEmpty)
                   _buildProfitDisplay(),
 
                 SizedBox(height: 24.h),
@@ -230,7 +234,8 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                           icon: Icons.inventory,
                           keyboardType: TextInputType.number,
                           validator: (value) {
-                            if (_trackStock && (value == null || value.isEmpty)) {
+                            if (_trackStock &&
+                                (value == null || value.isEmpty)) {
                               return 'Enter stock';
                             }
                             return null;
@@ -246,7 +251,8 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                           icon: Icons.warning_amber,
                           keyboardType: TextInputType.number,
                           validator: (value) {
-                            if (_trackStock && (value == null || value.isEmpty)) {
+                            if (_trackStock &&
+                                (value == null || value.isEmpty)) {
                               return 'Enter min stock';
                             }
                             return null;
@@ -307,10 +313,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(
-          color: MyColor.primary.withOpacity(0.2),
-          width: 1.w,
-        ),
+        border: Border.all(color: MyColor.primary.withOpacity(0.2), width: 1.w),
       ),
       child: Row(
         children: [
@@ -340,9 +343,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                 SizedBox(height: 4.h),
                 Text(
                   'Fill in the details to add a new product',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: MyColor.gray600,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: MyColor.gray600),
                 ),
               ],
             ),
@@ -362,18 +365,12 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
             decoration: BoxDecoration(
               color: MyColor.gray100,
               borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(
-                color: MyColor.outlineVariant,
-                width: 2.w,
-              ),
+              border: Border.all(color: MyColor.outlineVariant, width: 2.w),
             ),
             child: _imagePath != null
                 ? ClipRRect(
                     borderRadius: BorderRadius.circular(16.r),
-                    child: Image.asset(
-                      _imagePath!,
-                      fit: BoxFit.cover,
-                    ),
+                    child: Image.asset(_imagePath!, fit: BoxFit.cover),
                   )
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -386,9 +383,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                       SizedBox(height: 8.h),
                       Text(
                         'Product Image',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: MyColor.gray500,
-                        ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodySmall?.copyWith(color: MyColor.gray500),
                       ),
                     ],
                   ),
@@ -403,9 +400,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
             },
             icon: Icon(Icons.camera_alt, size: 18.sp),
             label: Text('Upload Image'),
-            style: TextButton.styleFrom(
-              foregroundColor: MyColor.primary,
-            ),
+            style: TextButton.styleFrom(foregroundColor: MyColor.primary),
           ),
         ],
       ),
@@ -415,9 +410,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
+      style: Theme.of(
+        context,
+      ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
     );
   }
 
@@ -436,9 +431,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
       children: [
         Text(
           label,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
         SizedBox(height: 8.h),
         TextFormField(
@@ -446,7 +441,8 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
           keyboardType: keyboardType,
           maxLines: maxLines,
           onChanged: (value) {
-            if (controller == _priceController || controller == _costController) {
+            if (controller == _priceController ||
+                controller == _costController) {
               setState(() {}); // Rebuild to update profit display
             }
           },
@@ -469,21 +465,18 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
   Widget _buildCategoryDropdown() {
     return DropdownButtonFormField<String>(
       initialValue: _selectedCategory,
+      isExpanded: true,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.category),
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       ),
       items: _categories.map((category) {
-        return DropdownMenuItem(
+        return DropdownMenuItem<String>(
           value: category,
-          child: Text(category),
+          child: Text(category, overflow: TextOverflow.ellipsis, maxLines: 1),
         );
       }).toList(),
-      onChanged: (value) {
-        setState(() {
-          _selectedCategory = value!;
-        });
-      },
+      onChanged: (value) => setState(() => _selectedCategory = value!),
     );
   }
 
@@ -496,7 +489,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: profit >= 0 ? MyColor.success.withOpacity(0.1) : MyColor.error.withOpacity(0.1),
+        color: profit >= 0
+            ? MyColor.success.withOpacity(0.1)
+            : MyColor.error.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
           color: profit >= 0 ? MyColor.success : MyColor.error,
@@ -516,9 +511,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
               SizedBox(width: 8.w),
               Text(
                 'Profit per unit:',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
               ),
             ],
           ),
@@ -585,10 +580,12 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   ),
                   SizedBox(height: 2.h),
                   Text(
-                    _trackStock ? 'Inventory tracking enabled' : 'Inventory tracking disabled',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: MyColor.gray500,
-                    ),
+                    _trackStock
+                        ? 'Inventory tracking enabled'
+                        : 'Inventory tracking disabled',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: MyColor.gray500),
                   ),
                 ],
               ),
@@ -682,13 +679,16 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   price: double.parse(_priceController.text),
                   cost: double.parse(_costController.text),
                   stock: _trackStock ? int.parse(_stockController.text) : 0,
-                  minStock: _trackStock ? int.parse(_minStockController.text) : 0,
+                  minStock: _trackStock
+                      ? int.parse(_minStockController.text)
+                      : 0,
                   unit: _selectedUnit,
                   image: _imagePath ?? '',
-                  status: _trackStock 
-                      ? (int.parse(_stockController.text) <= int.parse(_minStockController.text) 
-                          ? 'low_stock' 
-                          : 'in_stock')
+                  status: _trackStock
+                      ? (int.parse(_stockController.text) <=
+                                int.parse(_minStockController.text)
+                            ? 'low_stock'
+                            : 'in_stock')
                       : 'in_stock',
                   barcode: _barcodeController.text,
                 );

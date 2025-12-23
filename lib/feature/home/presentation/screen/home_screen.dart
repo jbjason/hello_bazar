@@ -466,11 +466,18 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildRecentActivity(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: MyColor.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(16.r),
         border: Border.all(color: MyColor.outlineVariant, width: 1.w),
+        boxShadow: [
+          BoxShadow(
+            color: MyColor.gray200.withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -479,33 +486,30 @@ class HomeScreen extends StatelessWidget {
             'Recent Activity',
             style: Theme.of(
               context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 16.h),
           _buildActivityItem(
             context: context,
-            icon: Icons.shopping_cart_checkout_outlined,
-            title: 'New Sale Completed',
-            subtitle: 'Order #2456 - ৳ 2,450',
-            time: '10 min ago',
+            icon: Icons.check_circle_outline,
+            title: 'New order received',
+            subtitle: '2 minutes ago',
             color: MyColor.success,
           ),
           Divider(height: 24.h, color: MyColor.outlineVariant),
           _buildActivityItem(
             context: context,
-            icon: Icons.person_add_alt_1_outlined,
-            title: 'New Customer Added',
-            subtitle: 'John Doe registered',
-            time: '25 min ago',
-            color: MyColor.primary,
+            icon: Icons.person_add_outlined,
+            title: 'New customer registered',
+            subtitle: '15 minutes ago',
+            color: const Color(0xFF0984E3),
           ),
           Divider(height: 24.h, color: MyColor.outlineVariant),
           _buildActivityItem(
             context: context,
-            icon: Icons.inventory_outlined,
-            title: 'Low Stock Alert',
-            subtitle: 'Product #1234 needs restocking',
-            time: '1 hour ago',
+            icon: Icons.inventory_2_outlined,
+            title: 'Low stock alert',
+            subtitle: '1 hour ago',
             color: MyColor.warning,
           ),
         ],
@@ -518,7 +522,6 @@ class HomeScreen extends StatelessWidget {
     required IconData icon,
     required String title,
     required String subtitle,
-    required String time,
     required Color color,
   }) {
     return Row(
@@ -529,7 +532,7 @@ class HomeScreen extends StatelessWidget {
             color: color.withOpacity(0.1),
             borderRadius: BorderRadius.circular(8.r),
           ),
-          child: Icon(icon, color: color, size: 20.w),
+          child: Icon(icon, color: color, size: 20.sp),
         ),
         SizedBox(width: 12.w),
         Expanded(
@@ -540,7 +543,7 @@ class HomeScreen extends StatelessWidget {
                 title,
                 style: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+                ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 2.h),
               Text(
@@ -551,12 +554,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        Text(
-          time,
-          style: Theme.of(
-            context,
-          ).textTheme.labelSmall?.copyWith(color: MyColor.gray400),
         ),
       ],
     );
