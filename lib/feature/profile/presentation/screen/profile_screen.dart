@@ -1,10 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
 import 'package:hello_bazar/core/constants/my_image.dart';
-import 'package:hello_bazar/feature/auth/presentation/page/login_screen.dart';
+import 'package:hello_bazar/feature/auth/presentation/screen/login_screen.dart';
+import 'package:hello_bazar/feature/auth/presentation/widget/logout_dialog.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -44,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => LoginPage()),
+                        MaterialPageRoute(builder: (_) => LoginScreen()),
                       );
                     },
                   ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hello_bazar/config/theme/app_theme.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
 import 'package:hello_bazar/core/util/my_dimens.dart';
 import 'package:hello_bazar/feature/customer/presentation/screen/customer_screen.dart';
@@ -56,7 +55,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildBanner(BuildContext context) {
-    final isMobile = AppTheme.isMobile(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -101,7 +99,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(isMobile ? 24.w : .13.w),
+            padding: EdgeInsets.all(24.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -158,7 +156,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildStatisticsOverview(BuildContext context) {
-    final isMobile = AppTheme.isMobile(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -174,7 +171,7 @@ class HomeScreen extends StatelessWidget {
           crossAxisCount: 2,
           mainAxisSpacing: 12.h,
           crossAxisSpacing: 12.w,
-          childAspectRatio: isMobile ? 1.4 : 1.8,
+          childAspectRatio: 1.4,
           children: [
             _buildStatCard(
               context: context,
@@ -219,7 +216,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildCategoriesGrid(BuildContext context) {
-    final isMobile = AppTheme.isMobile(context);
     final categories = [
       {
         'title': 'Product',
@@ -299,7 +295,7 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: isMobile ? 3 : 4,
+            crossAxisCount: 3,
             mainAxisSpacing: 12.h,
             crossAxisSpacing: 12.w,
             childAspectRatio: 0.9,
@@ -336,9 +332,8 @@ class HomeScreen extends StatelessWidget {
     required String trend,
     required bool isPositive,
   }) {
-    final isMobile = AppTheme.isMobile(context);
     return Container(
-      padding: EdgeInsets.all(isMobile ? 16.w : 12.w),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: MyColor.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(12.r),
@@ -556,6 +551,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
-
