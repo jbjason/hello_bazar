@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
 import 'package:hello_bazar/core/constants/my_image.dart';
+import 'package:hello_bazar/feature/auth/presentation/page/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -38,7 +41,12 @@ class ProfileScreen extends StatelessWidget {
                     title: 'My Account',
                     subtitle: 'Manage your account details',
                     color: MyColor.primary,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => LoginPage()),
+                      );
+                    },
                   ),
                   SizedBox(height: 12.h),
                   _buildMenuCard(
@@ -49,6 +57,7 @@ class ProfileScreen extends StatelessWidget {
                     color: MyColor.warning,
                     onTap: () {},
                   ),
+
                   SizedBox(height: 12.h),
                   _buildMenuCard(
                     context: context,
@@ -58,9 +67,9 @@ class ProfileScreen extends StatelessWidget {
                     color: MyColor.success,
                     onTap: () {},
                   ),
-          
+
                   SizedBox(height: 24.h),
-          
+
                   Text(
                     'Support',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -84,9 +93,19 @@ class ProfileScreen extends StatelessWidget {
                     title: 'Log Out',
                     subtitle: 'Sign out of your account',
                     color: MyColor.error,
-                    onTap: () {},
+                    onTap: () async {
+                      final shouldLogout = await LogoutDialog.show(context);
+                      if (shouldLogout == true) {
+                        // Navigator.pushReplacement(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const LoginPage(),
+                        //   ),
+                        // );
+                      }
+                    },
                   ),
-          
+
                   SizedBox(height: 24.h),
                 ],
               ),
