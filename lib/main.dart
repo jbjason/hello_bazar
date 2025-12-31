@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/config/theme/app_theme.dart';
-import 'package:hello_bazar/feature/home/presentation/screen/home.dart';
+import 'package:hello_bazar/feature/auth/presentation/screen/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         title: 'Hello Bazar',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light(context),
-        home: Home(),
+        home: LoginScreen(),
       ),
     );
   }

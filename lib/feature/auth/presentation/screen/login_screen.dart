@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hello_bazar/config/theme/app_theme.dart';
 import 'package:hello_bazar/core/constants/my_color.dart';
+import 'package:hello_bazar/feature/home/presentation/screen/home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     // Simulate API call
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 300));
 
     setState(() {
       _isLoading = false;
@@ -76,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     // Simulate API call
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 300));
 
     setState(() => _isLoading = false);
 
@@ -89,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: MyColor.success,
         ),
       );
+      Navigator.push(context, MaterialPageRoute(builder: (_) => Home()));
     }
   }
 
@@ -273,4 +275,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
